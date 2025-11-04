@@ -1,0 +1,6 @@
+# 环境变量文件（包含真实密钥，必须忽略）
+.env
+
+# Node.js 依赖
+node_modules/
+npm-debug.log
