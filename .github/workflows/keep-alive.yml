@@ -1,8 +1,9 @@
 name: Keep Supabase Alive
+description: 定时向 Supabase 发送请求，保持连接活跃
 
 on:
   schedule:
-    # 每4小时运行一次（足够保持活跃）
+    # 每4小时运行一次
     - cron: '0 */4 * * *'
   workflow_dispatch:  # 允许手动触发
 
@@ -17,9 +18,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'  # 缓存 npm 依赖，加速下次运行
           
-      - name: Ping Supabase
-        run: node scripts/ping-supabase.js
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Ping Supabase to keep alive
+        run: node scripts/keepalive.js  # 确保与脚本文件名一致
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
