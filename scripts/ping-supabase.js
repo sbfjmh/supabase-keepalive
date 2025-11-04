@@ -2,11 +2,11 @@ const https = require('https');
 
 // 从环境变量获取配置
 const supabaseUrl = process.env.SUPABASE_URL;
-const apiKey = process.env.SUPABASE_KEY;
+const apiKey = process.env.SUPABASE_ANON_KEY;
 const tableName = 'hanzi_medians'; // 确保表存在且有权限
 
 if (!supabaseUrl || !apiKey) {
-  console.error('❌ 请设置 SUPABASE_URL 和 SUPABASE_KEY 环境变量');
+  console.error('❌ 请设置 SUPABASE_URL 和 SUPABASE_ANON_KEY 环境变量');
   process.exit(1);
 }
 
