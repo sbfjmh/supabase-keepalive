@@ -18,4 +18,4 @@ jobs:
           # 仅配置 medicine-helper 的环境变量
           SUPABASE_URL_MEDICINE: ${{ secrets.SUPABASE_URL_MEDICINE }}
           SUPABASE_ANON_KEY_MEDICINE: ${{ secrets.SUPABASE_ANON_KEY_MEDICINE }}
-        run: node ping-medicine-helper.js
+        run: node scripts/ping-medicine-helper.js
