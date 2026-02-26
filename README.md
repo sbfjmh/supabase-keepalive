@@ -1,6 +1,7 @@
 # Supabase 保活脚本
 
 定期向 Supabase 发送请求，防止连接超时。
+2026.02.26 keep alive
 
 ## 配置步骤
 1. 克隆仓库：`git clone <仓库地址>`
