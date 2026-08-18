@@ -1,0 +1,30 @@
+# 记录健康小程序 - Supabase 数据库保活定时任务
+# 每天自动查询一次 Supabase 数据库，防止免费版因长时间不活动被暂停
+
+name: Health Tracker Keepalive
+
+on:
+  # 每天北京时间 08:00 执行（UTC 00:00）
+  schedule:
+    - cron: '0 0 * * *'
+  # 支持手动触发
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 执行保活脚本
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: node supabase-keepalive/keepalive-health.js
