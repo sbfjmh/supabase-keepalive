@@ -6,11 +6,11 @@
 const https = require('https');
 
 // 从环境变量读取配置
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseUrl = process.env.HEALTH_SUPABASE_URL;
+const supabaseKey = process.env.HEALTH_SUPABASE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('错误: 缺少环境变量 SUPABASE_URL 或 SUPABASE_KEY');
+  console.error('错误: 缺少环境变量 HEALTH_SUPABASE_URL 或 HEALTH_SUPABASE_KEY');
   process.exit(1);
 }
 
