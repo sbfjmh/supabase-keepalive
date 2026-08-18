@@ -4,9 +4,9 @@
 name: Health Tracker Keepalive
 
 on:
-  # 每天北京时间 08:00 执行（UTC 00:00）
+  # 每天北京时间 08:30 执行（UTC 00:30），与原项目错开 30 分钟
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '30 0 * * *'
   # 支持手动触发
   workflow_dispatch:
 
@@ -25,6 +25,6 @@ jobs:
 
       - name: 执行保活脚本
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: node supabase-keepalive/keepalive-health.js
+          HEALTH_SUPABASE_URL: ${{ secrets.HEALTH_SUPABASE_URL }}
+          HEALTH_SUPABASE_KEY: ${{ secrets.HEALTH_SUPABASE_KEY }}
+        run: node supabase-keepalive/scripts/keepalive-health.js
