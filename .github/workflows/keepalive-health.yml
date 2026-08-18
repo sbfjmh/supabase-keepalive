@@ -16,15 +16,15 @@ jobs:
 
     steps:
       - name: Checkout 代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: 执行保活脚本
         env:
           HEALTH_SUPABASE_URL: ${{ secrets.HEALTH_SUPABASE_URL }}
           HEALTH_SUPABASE_KEY: ${{ secrets.HEALTH_SUPABASE_KEY }}
-        run: node supabase-keepalive/scripts/keepalive-health.js
+        run: node scripts/keepalive-health.js
