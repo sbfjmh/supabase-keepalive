@@ -1,0 +1,31 @@
+name: Keep Repo Active
+
+on:
+  # 每天 UTC 00:00（北京时间 08:00）自动运行
+  schedule:
+    - cron: '0 0 * * *'
+  # 也支持手动触发
+  workflow_dispatch:
+
+jobs:
+  keep-active:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 触发仓库活动
+        uses: actions/checkout@v5
+
+      - name: 记录心跳时间戳
+        run: |
+          mkdir -p .github
+          date -u > .github/last-heartbeat.txt
+          echo "Heartbeat updated at $(date -u)"
+
+      - name: 自动提交（如无变化则跳过）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/last-heartbeat.txt || true
+          git commit -m "chore: daily heartbeat to keep workflows active" || echo "No changes, skip commit"
+          git push || echo "Nothing to push"
